@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../../../Cprogramming/Socket/sctp-sample"
+		},
+		{
+			"path": "../../../../../sctp_kernel/sctp_tool_dev"
+		}
+	],
+	"settings": {}
+}
