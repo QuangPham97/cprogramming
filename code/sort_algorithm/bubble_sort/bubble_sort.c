@@ -8,6 +8,7 @@
 #define	INSERTION_SORT 	1
 #define	SELECTION_SORT 	2
 #define QUICK_SORT		3
+#define MEGER_SORT		4
 
 void bubble_sort(int a[], const int n);
 void insertion_sort(int a[], const int size);
@@ -15,6 +16,7 @@ void swap(int a[], int i, int j);
 void genarate_random_number(int *a, unsigned int num);
 void show_array(int a[], const int size);
 void handler_array(int a[], int *size);
+void merge_sort(int *a, int left, int right);
 
 void show_array(
 	int a[],
@@ -31,7 +33,7 @@ void show_array(
 		printf("\n");
 	}else
 	{
-		printf("[%s][%d] Size array invalid!",__FUNCTION__, __LINE__);
+		printf("[%s][%d] Size array invalid!\n",__FUNCTION__, __LINE__);
 		return;
 	}
 }
@@ -135,7 +137,11 @@ void selection_sort(
 			swap(a, i , imin);
 	}
 }
-int partion(int *a, int high, int low)
+int partion(
+	int *a, 
+	int high, 
+	int low
+)
 {
 	int pivot = a[low]; /* Select pivot is first element */
 	int left = low + 1; /* Mark left in the next element */
@@ -176,7 +182,10 @@ void quick_sort(
 		quick_sort(a, high, pi+1);
 	}
 }
-void handler_array(int *a, int *size)
+void handler_array(
+	int *a, 
+	int *size
+)
 {
 	int i,j;
 	for(i = 0; i < *size; i++)
@@ -197,19 +206,91 @@ void handler_array(int *a, int *size)
 	}
 }
 
+void merge(
+	int *a,
+	int left,
+	int middle,
+	int right
+)
+{
+	int size_left_arr = middle - left + 1;
+	int size_righ_arr = right - middle;
+	int left_arr[size_left_arr], right_arr[size_righ_arr];
+
+	int i,j,k;
+	for(i = 0; i < size_left_arr; i++)
+		left_arr[i] = a[left+i];
+	for(i = 0; i < size_righ_arr; i++)
+		right_arr[i] = a[middle + i + 1];
+
+	i = 0;
+	j = 0;
+	k = left;
+	while (i < size_left_arr && j < size_righ_arr)
+	{
+		/* code */
+		if(left_arr[i] < right_arr[j])
+		{
+			a[k++] = left_arr[i++];
+		}else{
+			a[k++] = right_arr[j++];
+		}
+	}
+
+	while (i < size_left_arr)
+	{
+		/* code */
+		a[k++] = left_arr[i++];
+	}
+	while(j < size_righ_arr)
+	{
+		a[k++] = right_arr[j++];
+	}
+}
+
+void show_array_index(int a[], int x, int y)
+{
+	int i;
+	for (i = x; i <= y; i++)
+	{
+		printf("%d ", a[i]);
+	}
+	printf("\n");
+}
+void merge_sort(
+	int *a,
+	int left,
+	int right
+)
+{
+	int middle;
+	if(left < right)
+	{
+		middle = left + (right - left)/2;
+		// show_array_index(a, left, right);
+		merge_sort(a, left, middle);
+		// show_array_index(a, middle + 1, right);
+		merge_sort(a, middle + 1, right);
+		// show_array_index(a, middle + 1, right);
+		merge(a, left, middle, right);
+		// show_array_index(a, left, right);
+	}
+}
+
 int main(int argv, char **argc)
 {
 	int a[SIZE_ARR];
 	genarate_random_number(a, SIZE_ARR);
 	printf("Array origin: \n");
-	printf("Sort Algorithm\n");
+	int size = SIZE_ARR;
+	handler_array(a, &size);
+	show_array(a, size);
+	printf("\t\tSort Algorithm\n");
 	printf("0. Bubble Sort\n");
 	printf("1. Insertion Sort\n");
 	printf("2. Selection Sort\n");
 	printf("3. Quick Sort\n");
-	int size = SIZE_ARR;
-	handler_array(a, &size);
-	show_array(a, size);
+	printf("4. Merge Sort\n");
 	unsigned int c;
 	printf("Chose: ");
 	scanf("%u", &c);
@@ -240,6 +321,13 @@ int main(int argv, char **argc)
 		{
 			quick_sort(a,size - 1, 0);
 			printf("\nArray after use quick sort algorithm: \n");
+			show_array(a, size);
+		}
+		break;
+	case MEGER_SORT:
+		{
+			merge_sort(a, 0, size - 1);
+			printf("\nArray after use merge sort algorithm: \n");
 			show_array(a, size);
 		}
 		break;
