@@ -9,14 +9,16 @@
 #define	SELECTION_SORT 	2
 #define QUICK_SORT		3
 #define MEGER_SORT		4
+#define HEAP_SORT		5
 
 void bubble_sort(int a[], const int n);
 void insertion_sort(int a[], const int size);
+void merge_sort(int *a, int left, int right);
+void heap_sort(int *a);
 void swap(int a[], int i, int j);
 void genarate_random_number(int *a, unsigned int num);
 void show_array(int a[], const int size);
 void handler_array(int a[], int *size);
-void merge_sort(int *a, int left, int right);
 
 void show_array(
 	int a[],
@@ -276,7 +278,38 @@ void merge_sort(
 		// show_array_index(a, left, right);
 	}
 }
+void heapify(int a[], int size, int i)
+{
+	int root_node = i;
+	int right_node = 2*i + 1;
+	int left_node = 2*i + 2;
+	int larget_node = root_node;
+	if(left_node < size && a[left_node] > a[larget_node])
+		larget_node = left_node;
+	if(right_node < size && a[right_node] > a[larget_node])
+		larget_node = right_node;
+	if(larget_node != root_node) /* swap if left_node or right_node is largest root_node*/
+	{
+		swap(a, larget_node, root_node);
+		heapify(a, size, larget_node);
+	}
+	// show_array(a,size);
 
+}
+
+void build_heap(int a[], int size)
+{
+	int i;
+	for(i = size/2 -1; i>=0; i--)
+	{
+		heapify(a, size, i);
+	}
+	for(i = size - 1; i > 0; i--)
+	{
+		swap(a,0,i);
+		heapify(a, i, 0);
+	}
+}
 int main(int argv, char **argc)
 {
 	int a[SIZE_ARR];
@@ -291,6 +324,7 @@ int main(int argv, char **argc)
 	printf("2. Selection Sort\n");
 	printf("3. Quick Sort\n");
 	printf("4. Merge Sort\n");
+	printf("5. Heap Sort\n");
 	unsigned int c;
 	printf("Chose: ");
 	scanf("%u", &c);
@@ -328,6 +362,13 @@ int main(int argv, char **argc)
 		{
 			merge_sort(a, 0, size - 1);
 			printf("\nArray after use merge sort algorithm: \n");
+			show_array(a, size);
+		}
+		break;
+	case HEAP_SORT:
+		{
+			build_heap(a, size);
+			printf("\nArray after use heap sort algorithm: \n");
 			show_array(a, size);
 		}
 		break;
