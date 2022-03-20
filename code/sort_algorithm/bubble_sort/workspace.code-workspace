@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "../../../../../sctp_kernel/sctp_tool_dev"
+		},
+		{
+			"path": "../../../../../5GNR/5G_SA/5G_IPR"
 		}
 	],
 	"settings": {}

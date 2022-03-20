@@ -15,6 +15,9 @@
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
