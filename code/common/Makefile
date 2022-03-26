@@ -16,3 +16,6 @@ $(TARGET): $(OBJECTS)
 	$(AR) $(ARFLAGS) $(TARGET) $(OBJECTS)
 $(OUTPUT_LIB)/%.o: $(SRC)/%.c
 	$(CC) $(CLAGS) $< -o $@ $(INC)
+.PHONY: clean
+clean:
+	rm -rf lib/*

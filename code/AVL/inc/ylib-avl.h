@@ -1,7 +1,6 @@
 #ifndef _YLIB_BTS_H_H
 #define _YLIB_BTS_H_H
 #include "types.h"
-#include "logging.h"
 #include <signal.h>
 #define COMPARE_ERROR                   2
 #define FISRT_IS_EQUAL_TO_SECOND        0

@@ -99,7 +99,7 @@ void ytInsert(YTREE *tree, YTNODE *entry)
         entry->child[0] = entry->child[1] = NULL;
         set_child(&(tree->root),0, entry);
         tree->count++;
-        printf("[%s][%d] Insert node root  %p\n",__FUNCTION__, __LINE__, entry);
+        LOG_MSG(LOG_DEBUG,"Insert node root  %p", entry);
         return;
     }
     for(;;)
@@ -112,7 +112,7 @@ void ytInsert(YTREE *tree, YTNODE *entry)
                 entry->child[0] = entry->child[1] = 0;
                 set_child(p, 0, entry);
                 tree->count++;
-                printf("[%s][%d] Insert node left  %p\n",__FUNCTION__, __LINE__, entry);
+                LOG_MSG(LOG_DEBUG,"Insert node left  %p", entry);
                 break;
             }
             p = q;
@@ -125,7 +125,7 @@ void ytInsert(YTREE *tree, YTNODE *entry)
                 entry->child[0] = entry->child[1] = 0;
                 set_child(p, 1, entry);
                 tree->count++;
-                printf("[%s][%d] Insert node right %p\n",__FUNCTION__, __LINE__, entry);
+                LOG_MSG(LOG_DEBUG,"Insert node right %p", entry);
                 break;
             }
             p = q;
