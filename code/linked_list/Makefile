@@ -10,8 +10,11 @@ INC = 	-I$(PWD)/inc \
 		-I$(PWD)/../common/inc/
 
 OUTPUT_LIB = $(PWD)/lib/
+TARGET_OUTPUT_LIB = -L$(OUTPUT_LIB) -llinkedlist \
+					-L$(PWD)/../common/lib/ -lcommon
 TARGET = $(OUTPUT_LIB)liblinkedlist.a 
-
+TARGET_STATIC_LIB = $(TARGET) \
+					$(PWD)/../common/lib/libcommon.a
 SRCS = $(wildcard $(SRC)/*.c)
 OBJECTS	= $(patsubst %.c, $(OUTPUT_LIB)/%.o, $(notdir $(SRCS)))
 
@@ -25,7 +28,7 @@ $(TARGET): $(OBJECTS)
 $(OUTPUT_LIB)/%.o: $(SRC)/%.c
 	$(CC) $(CLAGS) $< -o $@ $(INC)
 $(BINARY):
-	$(CC) $(CLAG) $(TARGET) -L$(OUTPUT_LIB) $(INC) -o $(BINARY) -llinkedlist
+	$(CC) $(CLAG) $(TARGET_STATIC_LIB) $(TARGET_OUTPUT_LIB) $(INC) -o $(BINARY)
 	
 .PHONY: clean
 clean:

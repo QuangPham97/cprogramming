@@ -18,7 +18,7 @@ typedef struct
 }YTREE;
 
 /* Method implement */
-void ytInit(YTREE *, SInt32 (*compare)(const void *, const void *), const void *(*keyof)(YTNODE *));
+void ytInit(YTREE *, SInt32 (*compare)(const void *, const void *), const void *(*keyof)(const YTNODE *));
 void ytInsert(YTREE *, YTNODE *);
 
 #endif
