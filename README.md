@@ -1,5 +1,5 @@
 <h1 align="center">Hi 👋, I'm Quang</h1>
-<h3 align="center">A software developer from Viet Name</h3>
+<h3 align="center">A software developer from Viet Nam</h3>
 
 - 🔭 I’m currently working on **Macro 5G gNodeB**
 
